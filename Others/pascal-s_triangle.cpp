@@ -4,25 +4,20 @@
 using namespace std;
 
 vector<vector<int>> generate(int numRows) {
-    int add = 1;
-    vector< vector<int> > triangle;
-
-    if( numRows >= 1 ){
-        vector<int> row1 = {1};
-        triangle.push_back(row1);
-    }
+    vector<vector<int>> triangle;
+    triangle.push_back({1});    // first row
 
     for( int i = 1; i < numRows; i++ ){
-        vector<int> one_row;
-        one_row.push_back(1);
+        vector<int> row;
+        row.push_back(1);   // first element of each row
 
-        for( int j = 1; j < add; j++ ){
-            one_row.push_back(triangle[i-1][j-1] + triangle[i-1][j]);
+        for( int j = 1; j < triangle[i-1].size(); j++ ){
+            row.push_back(triangle[i-1][j-1] + triangle[i-1][j]);
+            // inner elements of each row
         }
 
-        one_row.push_back(1);
-        triangle.push_back(one_row);
-        add++;
+        row.push_back(1);   // last element of each row
+        triangle.push_back(row);
     }
 
     return triangle;
